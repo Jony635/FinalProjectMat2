@@ -229,9 +229,6 @@ function vec = Get_init_vec();
 global initial_vector;
 vec = initial_vector;
 
-function mat = Get_rotation_matrix();
-global rotation_mat;
-mat = rotation_mat;
 
 % --- Executes on button press in r_mat_calc.
 function r_mat_calc_Callback(hObject, eventdata, handles)
@@ -239,17 +236,5 @@ function r_mat_calc_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
     %Write r_mat in fig
-    r_mat = Get_rotation_matrix();
-    
-    set(handles.r_m_1_1,'String',r_mat(1,1));
-    set(handles.r_m_1_2,'String',r_mat(1,2));
-    set(handles.r_m_1_3,'String',r_mat(1,3));
-
-    set(handles.r_m_2_1,'String',r_mat(2,1));
-    set(handles.r_m_2_2,'String',r_mat(2,2));
-    set(handles.r_m_2_3,'String',r_mat(2,3));
-
-    set(handles.r_m_3_1,'String',r_mat(3,1));
-    set(handles.r_m_3_2,'String',r_mat(3,2));
-    set(handles.r_m_3_3,'String',r_mat(3,3));
+    r_m_1_3 = r_mat(1,3);
 
