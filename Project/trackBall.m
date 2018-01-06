@@ -766,7 +766,11 @@ psi = str2double(get(handles.psi,'String'));
 r_mat=eAngles2rotM(phi,theta,psi);
 %---------------------------Do All Again------------------------
     %Write quaternions
-    q0 = GetLastQuaternion();
+    if(isempty(GetLastQuaternion()))
+        q0 = [0;0;0;0];
+    else
+        q0 = GetLastQuaternion();
+    end
     set(handles.q0_0,'String',q0(1,1));
     set(handles.q0_1,'String',q0(2,1));
     set(handles.q0_2,'String',q0(3,1));
@@ -903,7 +907,11 @@ r_mat=Eaa2rotMat([e_axis_x;e_axis_y;e_axis_z],e_angle);
     set(handles.psi,'String',psi);    
 
     %Write quaternions
-    q0 = GetLastQuaternion();
+    if(isempty(GetLastQuaternion()))
+        q0 = [0;0;0;0];
+    else
+        q0 = GetLastQuaternion();
+    end
     set(handles.q0_0,'String',q0(1,1));
     set(handles.q0_1,'String',q0(2,1));
     set(handles.q0_2,'String',q0(3,1));
@@ -954,6 +962,70 @@ function pushquaternions_Callback(hObject, eventdata, handles)
 % hObject    handle to pushquaternions (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+Set_last_cube(handles.Cube);
+
+q1(1,1) = str2double(get(handles.q1_0,'String'));
+q1(2,1) = str2double(get(handles.q1_1,'String'));
+q1(3,1) = str2double(get(handles.q1_2,'String'));
+q1(4,1) = str2double(get(handles.q1_3,'String'));
+
+e_ang=quat2eul(q1);
+r_mat=eAngles2rotM(e_ang(1),e_ang(2),e_ang(3));
+%---------------------------Do All Again------------------------
+   
+
+    %Write Euler Angles
+    [phi,theta,psi]=rotM2eAngles(r_mat);
+    set(handles.phi,'String',phi);
+    set(handles.theta,'String',theta);
+    set(handles.psi,'String',psi);    
+
+    %Write quaternions
+    if(isempty(GetLastQuaternion()))
+        q0 = [0;0;0;0];
+    else
+        q0 = GetLastQuaternion();
+    end
+    q1 = eul2quat(phi, theta, psi);
+    Set_last_quaternion(q1);
+    qk = q_product(q0,q1);
+    set(handles.qk_0,'String',qk(1,1));
+    set(handles.qk_1,'String',qk(2,1));
+    set(handles.qk_2,'String',qk(3,1));
+    set(handles.qk_3,'String',qk(4,1));
+    
+    %Write Euler axis & angle
+    [e_axis,e_angle]=rotMat2Eaa(r_mat);
+    set(handles.e_axis_x,'String',e_axis(1,1));
+    set(handles.e_axis_y,'String',e_axis(2,1));
+    set(handles.e_axis_z,'String',e_axis(3,1));
+    set(handles.e_angle,'String',e_angle);
+    
+    %Write rotation vector
+    [e_axis,e_angle]=rotMat2Eaa(r_mat);
+    v_rot = RotVec(e_angle,e_axis);
+    set(handles.x,'String',v_rot(1));
+    set(handles.y,'String',v_rot(2));
+    set(handles.z,'String',v_rot(3));
+    
+    %Write r_mat 
+    Set_rotation_matrix(r_mat);
+    
+    set(handles.r_m_1_1,'String',r_mat(1,1));
+    set(handles.r_m_1_2,'String',r_mat(1,2));
+    set(handles.r_m_1_3,'String',r_mat(1,3));
+
+    set(handles.r_m_2_1,'String',r_mat(2,1));
+    set(handles.r_m_2_2,'String',r_mat(2,2));
+    set(handles.r_m_2_3,'String',r_mat(2,3));
+
+    set(handles.r_m_3_1,'String',r_mat(3,1));
+    set(handles.r_m_3_2,'String',r_mat(3,2));
+    set(handles.r_m_3_3,'String',r_mat(3,3));
+    
+    last_cube = GetLastCube();
+    handles.Cube = RedrawCube(r_mat,last_cube);
+    Set_last_cube(handles.Cube);
 
 
 % --- Executes on button press in pushrotvec.
@@ -983,7 +1055,11 @@ r_mat=Eaa2rotMat(axis,angle);
     set(handles.psi,'String',psi);    
 
     %Write quaternions
-    q0 = GetLastQuaternion();
+    if(isempty(GetLastQuaternion()))
+        q0 = [0;0;0;0];
+    else
+        q0 = GetLastQuaternion();
+    end
     set(handles.q0_0,'String',q0(1,1));
     set(handles.q0_1,'String',q0(2,1));
     set(handles.q0_2,'String',q0(3,1));
