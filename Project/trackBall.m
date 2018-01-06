@@ -162,11 +162,11 @@ if xmouse > xlim(1) && xmouse < xlim(2) && ymouse > ylim(1) && ymouse < ylim(2)
     set(handles.psi,'String',psi);
 
     %Write rotation vector
-    [e_axis,e_angle]=rotMat2Eaa(r_mat);
-    v_rot = RotVec(e_angle,e_axis);
-    set(handles.x,'String',v_rot(1));
-    set(handles.y,'String',v_rot(2));
-    set(handles.z,'String',v_rot(3));
+    %[e_axis,e_angle]=rotMat2Eaa(r_mat);
+    %v_rot = RotVec(init_vector,e_angle,e_axis);
+    %set(handles.x,'String',v_rot(1));
+    %set(handles.y,'String',v_rot(2));
+    %set(handles.z,'String',v_rot(3));
 
     
     %Write r_mat 
@@ -291,10 +291,6 @@ function Set_last_quaternion(l_q)
 global last_quat;
 last_quat = l_q;
 
-function Set_last_cube(l_c)
-global last_cube;
-last_cube = l_c;
-
 function vec = Get_init_vec();
 global initial_vector;
 vec = initial_vector;
@@ -306,10 +302,6 @@ mat = rotation_mat;
 function quat = GetLastQuaternion();
 global last_quat;
 quat = last_quat;
-
-function cube = GetLastCube();
-global last_cube;
-cube = last_cube;
 
 function q0_0_Callback(hObject, eventdata, handles)
 % hObject    handle to q0_0 (see GCBO)
@@ -757,16 +749,19 @@ function pusheulerangles_Callback(hObject, eventdata, handles)
 % hObject    handle to pusheulerangles (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-Set_last_cube(handles.Cube);
-
 phi = str2double(get(handles.phi,'String'));
 theta = str2double(get(handles.theta,'String'));
 psi = str2double(get(handles.psi,'String'));
 
 r_mat=eAngles2rotM(phi,theta,psi);
+init_vector = Get_init_vec();
 %---------------------------Do All Again------------------------
     %Write quaternions
+    if(GetLastQuaternion()==0)
+        q0 = [0;0;0;0];
+    else
     q0 = GetLastQuaternion();
+    end
     set(handles.q0_0,'String',q0(1,1));
     set(handles.q0_1,'String',q0(2,1));
     set(handles.q0_2,'String',q0(3,1));
@@ -793,9 +788,15 @@ r_mat=eAngles2rotM(phi,theta,psi);
     set(handles.e_axis_z,'String',e_axis(3,1));
     set(handles.e_angle,'String',e_angle);
    
+    %Write Euler Angles
+    [phi,theta,psi]=rotM2eAngles(r_mat);
+    set(handles.phi,'String',phi);
+    set(handles.theta,'String',theta);
+    set(handles.psi,'String',psi);
+
     %Write rotation vector
     [e_axis,e_angle]=rotMat2Eaa(r_mat);
-    v_rot = RotVec(e_angle,e_axis);
+    v_rot = RotVec(init_vector,e_angle,e_axis);
     set(handles.x,'String',v_rot(1));
     set(handles.y,'String',v_rot(2));
     set(handles.z,'String',v_rot(3));
@@ -815,9 +816,7 @@ r_mat=eAngles2rotM(phi,theta,psi);
     set(handles.r_m_3_2,'String',r_mat(3,2));
     set(handles.r_m_3_3,'String',r_mat(3,3));
     
-    last_cube = GetLastCube();
-    handles.Cube = RedrawCube(r_mat,last_cube);
-    Set_last_cube(handles.Cube);
+    handles.Cube = RedrawCube(r_mat,handles.Cube);    
 
 % --- Executes on button press in reset.
 function reset_Callback(hObject, eventdata, handles)
