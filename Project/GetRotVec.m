@@ -9,7 +9,7 @@ function [ vec ] = GetRotVec(radius, x, y)
         
     else 
         z = (radius.^2)/2*sqrt(x.^2 + y.^2);
-        vec = [x, y, z]'/sqrt(x.^2 + y.^2+Z.^2);
+        vec = [x, y, z]'/sqrt(x.^2 + y.^2+z.^2);
     end
 
 end

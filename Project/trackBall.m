@@ -134,7 +134,7 @@ if xmouse > xlim(1) && xmouse < xlim(2) && ymouse > ylim(1) && ymouse < ylim(2)
     set(handles.q0_2,'String',q0(3,1));
     set(handles.q0_3,'String',q0(4,1));
 
-    q1 = GetQuatFrom2Vec(init_vector,GetRotVec(3,xmouse,ymouse))
+    q1 = GetQuatFrom2Vec(init_vector,GetRotVec(3,xmouse,ymouse));
     set(handles.q1_0,'String',q1(1,1));
     set(handles.q1_1,'String',q1(2,1));
     set(handles.q1_2,'String',q1(3,1));
@@ -162,11 +162,11 @@ if xmouse > xlim(1) && xmouse < xlim(2) && ymouse > ylim(1) && ymouse < ylim(2)
     set(handles.psi,'String',psi);
 
     %Write rotation vector
-    [e_axis,e_angle]=rotMat2Eaa(r_mat);
-    v_rot = RotVec(init_vector,e_angle,e_axis);
-    set(handles.x,'String',v_rot(1));
-    set(handles.y,'String',v_rot(2));
-    set(handles.z,'String',v_rot(3));
+    %[e_axis,e_angle]=rotMat2Eaa(r_mat);
+    %v_rot = RotVec(init_vector,e_angle,e_axis);
+    %set(handles.x,'String',v_rot(1));
+    %set(handles.y,'String',v_rot(2));
+    %set(handles.z,'String',v_rot(3));
 
     
     %Write r_mat 
