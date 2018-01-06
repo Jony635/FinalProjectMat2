@@ -124,10 +124,10 @@ if xmouse > xlim(1) && xmouse < xlim(2) && ymouse > ylim(1) && ymouse < ylim(2)
     r_mat = Eaa2rotMat(axis, angle);
     
     %Write quaternions
-    if(GetLastQuaternion()==0)
+    if(GetLastQuaternion()==false)
         q0 = [0;0;0;0];
     else
-    q0 = GetLastQuaternion();
+        q0 = GetLastQuaternion();
     end
     set(handles.q0_0,'String',q0(1,1));
     set(handles.q0_1,'String',q0(2,1));
