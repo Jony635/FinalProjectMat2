@@ -1,4 +1,4 @@
-function [ vec ] = GetRotVec(radius,x,y)
+function [ vec ] = GetRotVec(radius, x, y)
 %GET Summary of this function goes here
 %   Detailed explanation goes here
     vec=0;
