@@ -767,7 +767,7 @@ init_vector = Get_init_vec();
     set(handles.q0_2,'String',q0(3,1));
     set(handles.q0_3,'String',q0(4,1));
 
-    q1 = GetQuatFrom2Vec(init_vector,GetRotVec(3, 0, 0));%Aqui esta el follon, el mousex/y ya no estan y no tendria sentido guardalo so ni pajolera idea de como solucionarlo
+    q1 = eul2quat(phi, theta, psi);
     set(handles.q1_0,'String',q1(1,1));
     set(handles.q1_1,'String',q1(2,1));
     set(handles.q1_2,'String',q1(3,1));
