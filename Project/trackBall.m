@@ -823,11 +823,49 @@ function reset_Callback(hObject, eventdata, handles)
 % hObject    handle to reset (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-set(handles.axes1,'CameraPosition',...
-    [0 0 5],'CameraTarget',...
-    [0 0 -5],'CameraUpVector',...
-    [0 1 0],'DataAspectRatio',...
-    [1 1 1]);
+handles.Cube = RedrawCube(eye(3,3) ,handles.Cube); 
+set(handles.q0_0,'String',0);
+set(handles.q0_1,'String',0);
+set(handles.q0_2,'String',0);
+set(handles.q0_3,'String',0);
+
+set(handles.q1_0,'String',0);
+set(handles.q1_1,'String',0);
+set(handles.q1_2,'String',0);
+set(handles.q1_3,'String',0);
+
+Set_last_quaternion([0;0;0;0]);
+
+set(handles.qk_0,'String',0);
+set(handles.qk_1,'String',0);
+set(handles.qk_2,'String',0);
+set(handles.qk_3,'String',0);
+
+set(handles.e_axis_x,'String',0);
+set(handles.e_axis_y,'String',0);
+set(handles.e_axis_z,'String',0);
+set(handles.e_angle,'String',0);
+
+set(handles.phi,'String',0);
+set(handles.theta,'String',0);
+set(handles.psi,'String',0);
+
+set(handles.x,'String',0);
+set(handles.y,'String',0);
+set(handles.z,'String',0);
+
+set(handles.r_m_1_1,'String',1);
+set(handles.r_m_1_2,'String',0);
+set(handles.r_m_1_3,'String',0);
+
+set(handles.r_m_2_1,'String',0);
+set(handles.r_m_2_2,'String',1);
+set(handles.r_m_2_3,'String',0);
+
+set(handles.r_m_3_1,'String',0);
+set(handles.r_m_3_2,'String',0);
+set(handles.r_m_3_3,'String',1);
+
 
 % --- Executes during object creation, after setting all properties.
 function axes1_CreateFcn(hObject, eventdata, handles)
