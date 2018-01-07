@@ -134,7 +134,7 @@ if xmouse > xlim(1) && xmouse < xlim(2) && ymouse > ylim(1) && ymouse < ylim(2)
     set(handles.q0_2,'String',q0(3,1));
     set(handles.q0_3,'String',q0(4,1));
 
-    q1 = GetQuatFrom2Vec(init_vector,GetRotVec(3,xmouse,ymouse));
+    q1 = GetQuatFrom2Vec(init_vector, GetRotVec(3,xmouse,ymouse));
     set(handles.q1_0,'String',q1(1,1));
     set(handles.q1_1,'String',q1(2,1));
     set(handles.q1_2,'String',q1(3,1));
@@ -183,11 +183,6 @@ if xmouse > xlim(1) && xmouse < xlim(2) && ymouse > ylim(1) && ymouse < ylim(2)
     set(handles.r_m_3_1,'String',r_mat(3,1));
     set(handles.r_m_3_2,'String',r_mat(3,2));
     set(handles.r_m_3_3,'String',r_mat(3,3));
-    
-    
-    
-    
-    
     
     handles.Cube = RedrawCube(r_mat,handles.Cube);    
 end
